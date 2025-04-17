@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>продукты</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+
+    <div class="content">
+    </div>
+
+    <p><Button class="up"></Button></p>
+    <a href="#top"><img src="/Продукты/img/up.png" alt="стрелочка вверх" class="up-button"></a>
+
+
+    <a id="top"></a>
+
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <button class="header__burger" id="burger" aria-label="Показать меню">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="logo">
+                    <img src="image/logo.png" class="logotipe" alt="logo">
+                    <a href="#" class="logo-accent1">eco<span class="logo-accent">.pro</span></a>
+                </div>
+                <nav class="menu">
+                    <ul class="menu_list">
+                        <li class="menu_item"><a href="main.html">Главная</a></li>
+                        <li class="menu_item"><a href="index.html">О нас</a></li>
+                        <li class="menu_item"><a href="product.html">Продукты</a></li>
+                        <li class="menu_item"><a href="blog.html">Блог</a></li>
+                        <li class="menu_item"><a href="#footerr">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <button class="cart-button" onclick="openCart()" aria-label="Корзина">
+            <img class="cart-image" src="image/cart.png" alt="cart-image">
+        </button>
+        <article id="cartModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCart()">×</span>
+                <h2 class="openCart">Корзина</h2>
+                <ul id="cart-items"></ul>
+                <p class="total-price">Итого: <span id="total-price">0</span> ₽</p>
+                <button class="clear-cart-button" onclick="clearCart()">
+                    Очистить корзину
+                </button>
+                <form id="order-form" method="post" action="/order" onsubmit="submitOrder(event)" autocomplete="on">
+                    <h3>Оформление заказа</h3>
+                    <label for="name">ФИО:</label>
+                    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                    <label for="email">Почта:</label>
+                    <input type="text" id="email" name="email" placeholder="Ваша почта" required>
+                    <label for="phone">Номер телефона:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99" required
+                        title="Введите номер телефона">
+                    <label for="address">Адрес:</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Улица, дом, квартира"
+                        required></textarea>
+                    <label for="delivery-method">Способ доставки:</label>
+                    <select id="delivery-method" name="delivery-method" required>
+                        <option value="" disabled selected>
+                            Выберите способ доставки
+                        </option>
+                        <option value="courier">Курьером</option>
+                        <option value="pickup">Самовывоз</option>
+                        <option value="post">Почтой</option>
+                    </select>
+
+                    <label for="payment-method">Способ оплаты:</label>
+                    <select id="payment-method" name="payment-method" required>
+                        <option value="" disabled selected>Выберите способ оплаты</option>
+                        <option value="card">Картой</option>
+                        <option value="cash">Наличными</option>
+                        <option value="online">Онлайн-оплата</option>
+                    </select>
+
+                    <label>Вы даете согласие на обработку персональных данных </label>
+                    <input type="checkbox" class="checkbox">
+
+                    <button type="submit" class="order-button">Оформить заказ</button>
+                </form>
+
+                <div id="confirmation-message" style="display: none; text-align: center; margin-top: 20px">
+                    Спасибо за ваш заказ! Мы свяжемся с вами в ближайшее время.
+                </div>
+            </div>
+        </article>
+
+        <main>
+            <section class="featured-products">
+                <div class="containerr">
+                    <div class="catalog-categories" id="catalog-button">
+                        <img src="img/logo.svg" alt="logo">
+                        <div class="catalog">Каталог</div>
+                    </div>
+
+                    <div class="search-box">
+                        <button class="btn-search"><img src="img/search.png" alt="png"></button>
+                        <input id="searchbar" onkeyup="search_animal()" type="text" name="search" class="input-search"
+                            placeholder="Search">
+                    </div>
+
+                    <div id="catalog" class="catalog-hidden">
+                        <h4 style="text-indent: 30px;">Фрукты и овощи и зелень</h4>
+                        <div class="cards">
+                            <ul class="menu-eat">
+                                <li><a href="#fruktis"><img src="img/fruikt.png" alt="фрукты"></a></li>
+                                <li><a href="#ovoshis"><img src="img/ovoshi.png" alt="овощи"
+                                            style="position: absolute; margin-left: 105px; margin-top: -105px;"></a>
+                                </li>
+                                <li><a href="#zelen"><img src="img/zelen.png" alt="зелень"
+                                            style="position: absolute; margin-left: 210px; margin-top: -105px;"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 style="text-indent: 30px; margin-top: -450px ;">Мясо, птица и рыба</h4>
+                        <div class="cards">
+                            <ul>
+                                <li><img src="img/gavadina.png" alt="говядина" style="margin-left: 30px;"></li>
+                                <li><img src="img/ptisa_dich.png" alt="цыплёнок"
+                                        style="margin-left: 135px; margin-top: -105px; position: absolute;"></li>
+                                <li><img src="img/riba.png" alt="рыба"
+                                        style="margin-left: 240px; margin-top: -105px; position: absolute;"></li>
+                                <li><img src="img/myasnie_delikateci.png" alt="мясной деликотес"
+                                        style="margin-left: 345px; margin-top: -105px; position: absolute;"></li>
+                            </ul>
+                        </div>
+                        <h4 style="margin-left: 30px;">Молочная продукция</h4>
+                        <div class="cards">
+                            <ul>
+                                <li><img src="img/moloko_slivi.png" style="width: 220px; margin-left: 30px;"
+                                        alt="молоко, сливки"></li>
+                                <li><img src="img/сыры.png" alt="сыры"
+                                        style="margin-left: 255px; margin-top: -105px; position: absolute;"></li>
+                                <li><img src="img/яйцо_и_майонез.png" alt="яйци и майонез" style="margin-left: 30px;">
+                                </li>
+                                <li><img src="img/растительные_напитки.png" alt="напитки"
+                                        style="margin-left: 135px; margin-top: -105px; position: absolute;"></li>
+                            </ul>
+                        </div>
+                        <h4 style="margin-left: 30px;">Мёд, Чай, Кофе и тд.</h4>
+                        <div class="cards">
+                            <ul>
+                                <li><img src="img/чай-кофе-мёд.png" style="width: 220px; margin-left: 30px;"
+                                        alt="чай, кофе и мёд"></li>
+                                <li><img src="img/соль-сахар-мука.png" alt="соль, сахар и мука"
+                                        style="margin-left: 255px; margin-top: -105px; position: absolute;"></li>
+                                <li><img src="img/соусы.png" alt="соусы"
+                                        style="margin-left: 255px; position: absolute;"></li>
+                            </ul>
+                        </div>
+                        <div class="cards">
+                            <ul>
+                                <li><img src="img/пиправа-специи.png" style="width: 220px; margin-left: 30px;"
+                                        alt="приправа специи"></li>
+                                <li><img src="img/чипсы-фокачча.png" style="margin-left: 255px; position: absolute;"
+                                        alt="чипсы-фокачча"></li>
+                                <li><img src="img/варенье-мед.png" style="width: 220px;margin-left: 30px;"
+                                        alt="варенье-мед"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section class="featured-products">
+                <div class="containerr">
+                    <div class="catalog-categories1">
+
+                        <a href="#fruktis"><button class="fruikti">Фрукты</button></a>
+                        <a href="#ovoshis"><button class="ovoshi">Овощи</button></a>
+                        <a href="#zelen"><button class="ovoshi">Зелень</button></a>
+                    </div>
+                </div>
+            </section>
+            <section role="region" aria-labelledby="popular-products-title" class="featured-products">
+                <div class="container">
+                    <div id="fruktis">
+                        <h3 id="popular-products-title1">Фрукты</h3>
+                    </div>
+                    <h4>Цитрусовые</h4>
+
+                    <article class="products-grid">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/апельсин-премиум.jpg" alt="Апельсины Premium">
+                            </a>
+                            <h3>Апельсины Premium</h3>
+                            <p class="price1">1 кг</p>
+                            <button onclick="addToCart('Апельсины Premium', 345)">345 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/апельсины-для-сока.jpg" alt="Апельсины для сока">
+                            </a>
+                            <h3>Апельсины для сока<br></h3>
+                            <p class="price">2,50 кг</p>
+                            <button onclick="addToCart('Апельсины для сока', 495)">495 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/апельсины-сорт-силицийский.jpg" alt="Апельсины сицилийский">
+                            </a>
+                            <h3>Апельсины сицилийский<br></h3>
+                            <p class="price">1 кг</p>
+                            <button onclick="addToCart('Апельсины сицилийский', 395)">395 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/АПЕЛЬСИНЫ.jpg" alt="Апельсины">
+                            </a>
+                            <h3>Апельсины<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Апельсины', 385)">385 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/мандарины-крупные-азия.jpg" alt="Мандарины крупные Азия">
+                            </a>
+                            <h3>Мандарины крупные Азия<br></h3>
+                            <p class="price">300 г</p>
+                            <button onclick="addToCart('Мандарины крупные Азия', 425)">425 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/мандариныЮАР.jpg" alt="мандарин ЮАР">
+                            </a>
+                            <h3>Мандарины ЮАР <br></h3>
+                            <p class="price">300 г</p><br>
+                            <button onclick="addToCart('Мандарины ЮАР', 275)">275 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+                    <article class="products-grid1">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/лимон.jpg" alt="лимон">
+                            </a>
+                            <h3>Лимон <br></h3>
+                            <p class="price">500 г</p><br>
+                            <button onclick="addToCart('Лимон', 195)">195 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/лимон-узбекский.jpg" alt="лимон узбекский">
+                            </a>
+                            <h3>Лимон узбекский 2 шт <br></h3>
+                            <p class="price">300 г</p>
+                            <button onclick="addToCart('Лимон узбекский 2 шт', 215)">215 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/лайм.jpg" alt="лайм">
+                            </a>
+                            <h3>Лайм <br>к</h3>
+                            <p class="price">200 г</p>
+                            <button onclick="addToCart('Лайм', 115)">115 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/кумкват-свежий.jpg" alt="кумкват свежий">
+                            </a>
+                            <h3>Кумкват свежий<br></h3>
+                            <p class="price">200 г</p><br>
+                            <button onclick="addToCart('Кумкват свежий', 645)">645 ₽
+                            </button>
+                        </div>
+                    </article>
+
+
+
+
+                    <h4 id="popular-products-title">Яблоки</h4>
+
+                    <article class="products-grid">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-granny.jpg" alt="яблоки-гренни" url="apple">
+                            </a>
+                            <h3>Яблоки granny<br></h3>
+                            <p class="price1">1 кг</p><br>
+                            <button onclick="addToCart('Яблоки granny', 295)">295 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/Яблоки-pink-lady.jpg" alt="яблоки розовая леди">
+                            </a>
+                            <h3>Яблоки Пинк Леди<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Яблоки Пинк Леди', 325)">325 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-амброзия.jpg" alt="яблоки амброзия">
+                            </a>
+                            <h3>Яблоки Амброзия<br></h3>
+                            <p class="price">750 г</p><br>
+                            <button onclick="addToCart('Яблоки Амброзия', 525)">525 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-голден.jpg" alt="яблоки-голден">
+                            </a>
+                            <h3>Яблоки Голден<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Яблоки Голден', 345)">345 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-микс.jpg" alt="яблоки микс">
+                            </a>
+                            <h3>Яблоки Органик Микс<br></h3>
+                            <p class="price">700 г</p>
+                            <button onclick="addToCart('Яблоки Органик Микс', 875)">875 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-миникарлики.png" alt="яблоки мини-карлики">
+                            </a>
+                            <h3>Яблоки мини-карлики<br></h3>
+                            <p class="price">250 г</p>
+                            <button onclick="addToCart('Яблоки мини-карликий', 395)">395 ₽
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="products-grid" style="max-width: 400px;">
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-ред.jpg" alt="яблоки-ред">
+                            </a>
+                            <h3>Яблоки Ред<br></h3>
+                            <p class="price">750 г</p><br>
+                            <button onclick="addToCart('Яблоки Ред', 246)">246 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/яблоки-сезонные.jpeg" alt="яблоки-сезонные">
+                            </a>
+                            <h3>Яблоки Сезонные<br></h3>
+                            <p class="price">500 г</p><br>
+                            <button onclick="addToCart('Яблоки Сезонные', 175)">175 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <h4 id="popular-products-title">Ананас</h4>
+                    <article class="products-grid1">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/ананас-биг-монте.jpg" alt="ананас биг монте" url="apple">
+                            </a>
+                            <h3>Ананас Мини Монте<br></h3>
+                            <p class="price1">500 г</p>
+                            <button onclick="addToCart('Ананас Мини Монте', 995)">995 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/ананас-мелкий.jpg" alt="ананас маленький">
+                            </a>
+                            <h3>Ананас - мини<br></h3>
+                            <p class="price">1 кг</p>
+                            <button onclick="addToCart('Ананас - мини', 80)">80 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/ананас-олден-спелый.jpg" alt="ананас спелый">
+                            </a>
+                            <h3>Ананас Gold спелый<br></h3>
+                            <p class="price">банка</p>
+                            <button onclick="addToCart('Ананас Gold спелый', 500)">500 ₽
+                            </button>
+                        </div>
+
+
+                    </article>
+
+
+                    <h4 id="popular-products-title">Виноград</h4>
+                    <article class="products-grid1">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/виноград-белый-без-косточек.jpg" alt="виноград белый" url="apple">
+                            </a>
+                            <h3>Виноград Королевский<br></h3>
+                            <p class="price1">500 г</p>
+                            <button onclick="addToCart('Виноград Королевский', 550)">550 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/виноград-черный-изабелла.jpg" alt="виноград черный Изабелла">
+                            </a>
+                            <h3>Виноград черный Изобелла<br></h3>
+                            <p class="price">1 кг</p>
+                            <button onclick="addToCart('Виноград черный Изобелла', 675)">675 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/виноград-черный.jpg" alt="виноград черный">
+                            </a>
+                            <h3>Виноград Черный<br></h3>
+                            <p class="price">1 кг</p>
+                            <button onclick="addToCart('Виноград Черный', 525)">525 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+
+
+
+                </div>
+            </section>
+
+
+            <section role="region" aria-labelledby="popular-products-title" class="featured-products">
+                <div class="container">
+
+                    <div id="ovoshis">
+                        <h3 id="popular-products-title">Овощи</h3>
+                    </div>
+                    <h4 id="popular-products-title1">Помидоры и Огурцы</h4>
+
+                    <article class="products-grid">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-желтые-сливки.jpg" alt="помидоры жёлтые" url="apple">
+                            </a>
+                            <h3>Помидоры желтые сливка<br></h3>
+                            <p class="price1">500 г</p>
+                            <button onclick="addToCart('Помидоры желтые сливка', 415)">415 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-розовые-азербайджан.jpg" alt="помидры розовые азербайджанские">
+                            </a>
+                            <h3>Помидоры розовые Азербайджан <br></h3>
+                            <p class="price">500 г</p>
+                            <button onclick="addToCart('Помидоры розовые Азербайджан', 345)">345 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-узбекские.jpeg" alt="помидоры узбекские">
+                            </a>
+                            <h3>Помидоры Узбекские<br></h3>
+                            <p class="price">500 г</p>
+                            <button onclick="addToCart('Помидоры Узбекские', 875)">875 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-черные.jpg" alt="помидоры черные">
+                            </a>
+                            <h3>Помидоры Черные<br></h3>
+                            <p class="price">500 г</p><br>
+                            <button onclick="addToCart('Помидоры Черные', 310)">310 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-черри-байкальские.jpg" alt="помидоры черри, байкальские">
+                            </a>
+                            <h3>Помидоры черри Байкальские<br></h3>
+                            <p class="price">500 г</p>
+                            <button onclick="addToCart('Помидоры черри Байкальские',275)">275 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-черри-желтые.jpg" alt="помидоры черри, желтые">
+                            </a>
+                            <h3>Помидоры черри желтые молодой</h3>
+                            <p class="price">250 г</p>
+                            <button onclick="addToCart('Помидоры черри желтые', 295)">295 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+                    <article class="products-grid">
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/помидоры-черри-на-ветке.jpg" alt="помидоры черри, на ветке">
+                            </a>
+                            <h3>Помидоры черри на ветке <br></h3>
+                            <p class="price">250 г</p>
+                            <button onclick="addToCart('Помидоры черри на ветке', 410)">410 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/огурей-байкальское.jpg" alt="огурец байкальский">
+                            </a>
+                            <h3>Огурцы Луховицкие<br></h3>
+                            <p class="price">1 кг</p>
+                            <button onclick="addToCart('Огурцы Луховицкие', 320)">320 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/огурец-байкальское-светлые.jpg" alt="огурец байкальский светлый">
+                            </a>
+                            <h3>Огурцы Байкальские<br></h3>
+                            <p class="price">500 г</p>
+                            <button onclick="addToCart('Огурцы Байкальские', 475)">475 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/огурец-длинное.jpg" alt="огурец длинный">
+                            </a>
+                            <h3>Огурцы Байкал светлые</h3>
+                            <p class="price">250 г</p>
+                            <button onclick="addToCart('Огурцы Байкальские светлые', 475)">475 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/огурец-с-шипами.jpg" alt="огурец с шипами">
+                            </a>
+                            <h3>Огурцы Кураж<br></h3>
+                            <p class="price">250 г</p><br>
+                            <button onclick="addToCart('Огурцы Кураж', 260)">260 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/огурец-тепличные.jpg" alt="огурец тепличный">
+                            </a>
+                            <h3>Огурцы тепличные<br></h3>
+                            <p class="price">250 г</p><br>
+                            <button onclick="addToCart('Огурцы тепличные', 260)">260 ₽
+                            </button>
+                        </div>
+                    </article>
+
+
+
+
+                    <h4 id="popular-products-title">Морковь и Капуста</h4>
+
+                    <article class="products-grid">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/морковь-в-упаковке.jpg" alt="морковь в упаковке" url="apple">
+                            </a>
+                            <h3>Морковь в упаковке<br></h3>
+                            <p class="price1">200 г</p>
+                            <button onclick="addToCart('Морковь в упаковке', 995)">995 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/морковь-желтая-грязная.jpg" alt="морковь желтая грязная">
+                            </a>
+                            <h3>Морковь Грязная<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Морковь Грязная', 115)">115 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/морковь-мытая.jpg" alt="морковь мытая">
+                            </a>
+                            <h3>Морковь мытая<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Морковь мытая', 135)">135 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/морковь-с-листьями.jpg" alt="морковь с листьями">
+                            </a>
+                            <h3>Морковь с пучок<br></h3>
+                            <p class="price">250 г</p><br>
+                            <button onclick="addToCart('Морковь с пучок', 475)">475 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/морковь.jpg" alt="морковь">
+                            </a>
+                            <h3>Морковь<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Морковь', 135)">135 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/капуста-брокколи.jpg" alt="капуста брокколи">
+                            </a>
+                            <h3>Капуста Брокколи<br></h3>
+                            <p class="price">500 г</p><br>
+                            <button onclick="addToCart('Капуста Брокколи', 295)">295 ₽
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="products-grid" style="max-width: 600px;">
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/капуста-печанская.jpg" alt="капуста пекинская">
+                            </a>
+                            <h3>Капуста Печанская<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Капуста Печанская', 295)">295 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/капуста-савойская.jpg" alt="капуста савойская">
+                            </a>
+                            <h3>Капуста Севейская<br></h3>
+                            <p class="price">1,46 кг</p><br>
+                            <button onclick="addToCart('Капуста Севейская', 1155)">1155 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/капуста-цветная.jpg" alt="капуста цветная">
+                            </a>
+                            <h3>Капуста Цветлая<br></h3>
+                            <p class="price">1 кг</p><br>
+                            <button onclick="addToCart('Капуста Цветлая', 395)">395 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </section>
+
+
+
+            <section role="region" aria-labelledby="popular-products-title" class="featured-products">
+                <div class="container">
+
+                    <div id="zelen">
+                        <h3 id="popular-products-title">Зелень и салаты</h3>
+                    </div>
+                    <h4 id="popular-products-title1">Зелень</h4>
+
+                    <article class="products-grid">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/базилик_фиолетовый.jpg" alt="базилик фиолетовый" url="apple">
+                            </a>
+                            <h3>Базилик purple<br></h3>
+                            <p class="price1">50 г</p><br>
+                            <button onclick="addToCart('Базилик purple', 375)">375 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/кинза.jpg" alt="кинза">
+                            </a>
+                            <h3>Кинза<br></h3>
+                            <p class="price">50 г</p><br>
+                            <button onclick="addToCart('Кинза', 95)">95 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/Мята.jpg" alt="мята">
+                            </a>
+                            <h3>Мята<br></h3>
+                            <p class="price">50 г</p><br>
+                            <button onclick="addToCart('Мята', 145)">145 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/петрушка.jpg" alt="петрушка">
+                            </a>
+                            <h3>Петрушка<br></h3>
+                            <p class="price">50 г</p><br>
+                            <button onclick="addToCart('Петрушка', 475)">85 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/петрушка_кудрявая.jpg" alt="петрушка кудрявая">
+                            </a>
+                            <h3>Петрушка кудрявая<br></h3>
+                            <p class="price">50 г</p>
+                            <button onclick="addToCart('Петрушка кудрявая', 345)">345₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/сельдерей_ботва.jpg" alt="сельдерей">
+                            </a>
+                            <h3>Сельдерей ботва<br></h3>
+                            <p class="price">50 г</p><br>
+                            <button onclick="addToCart('Сельдерей ботва', 95)">95 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+                    <article class="products-grid" style="max-width: 600px;">
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/укроп.jpg" alt="укроп">
+                            </a>
+                            <h3>Укроп<br></h3>
+                            <p class="price">50 г</p><br>
+                            <button onclick="addToCart('Укроп', 95)">95 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/чеснок_с_ботвой.jpg" alt="чеснок с ботвой">
+                            </a>
+                            <h3>Чеснок с ботвой<br></h3>
+                            <p class="price">60 г</p><br>
+                            <button onclick="addToCart('Чеснок с ботвой', 235)">235 ₽
+                            </button>
+                        </div>
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/шпинат.jpg" alt="шпинат">
+                            </a>
+                            <h3>Шпинат<br></h3>
+                            <p class="price">100 г</p><br>
+                            <button onclick="addToCart('Шпинат', 225)">225 ₽
+                            </button>
+                        </div>
+
+
+                    </article>
+
+
+
+
+                    <h4 id="popular-products-title">Салаты</h4>
+
+                    <article class="products-grid" style="max-width: 800px;">
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/капусталистоваяПАК_ЧОЙ.jpg" alt="капуста пакчой" url="apple">
+                            </a>
+                            <h3>Капуста Пак Мак в срезе<br></h3>
+                            <p class="price1">100 г</p>
+                            <button onclick="addToCart('апуста Пак Мак в срезе', 350)">350 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/Листовая_капуста_мизуна_срезе.jpg" alt="листовая капуста мизуна">
+                            </a>
+                            <h3>Листовая капуста "Азимов" в срезе<br></h3>
+                            <p class="price">100 г</p>
+                            <button onclick="addToCart('Листовая капуста Азимов в срезея', 350)">350 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/Микс листовыхсалатов.jpg" alt="микс листовых салатов">
+                            </a>
+                            <h3>Mix листовых салатов</h3>
+                            <p class="price">75 г</p>
+                            <button onclick="addToCart('Mix листовых салатов в срезе', 295)">295 ₽
+                            </button>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#!" class="card_img">
+                                <img src="img/Микс_салатов_Премиум.jpg" alt="микс салатов премиум">
+                            </a>
+                            <h3>Mix салатов Premium<br></h3>
+                            <p class="price">75 г</p>
+                            <button onclick="addToCart('Mix салатов Premium', 350)">350 ₽
+                            </button>
+                        </div>
+
+                    </article>
+
+            </section>
+
+        </main>
+
+        <div id="footerr">
+            <div class="footer">
+              <p>&copy;2025 eco.pro <br>Все права защищены.</p>
+              <div class="footerp">Контакты<br><br>8 (999) 999-99-99<br><br>eco.prod@mail.ru</div>
+              <a href="https://vk.com"><img src="image/vk.png" alt="vk" class="vk"></a>
+              <a href="https://web.telegram.org/a/"><img src="image/tg.png" alt="tg" class="tg"></a>
+              <a href="https://ok.ru/"><img src="image/ok.png" alt="ok" class="ok"></a>
+            </div>
+          </div>
+        </footer>
+
+        <style>
+            ::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.473);
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(0, 0, 0, 0.5);
+            }
+        </style>
+        </style>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

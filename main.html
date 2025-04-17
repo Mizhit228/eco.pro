@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Эко-Продукты</title>
+  <link rel="stylesheet" href="style1.css">
+  <link href="https://fonts.googleapis.com" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script defer src="js/main.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <button class="header__burger" id="burger" aria-label="Показать меню">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="logo">
+        <img src="image/logo.png" class="logotipe" alt="logo">
+        <a href="#" class="logo-accent1">eco<span class="logo-accent">.pro</span></a>
+      </div>
+      <nav class="menu">
+        <ul class="menu_list">
+          <li class="menu_item"><a href="main.html">Главная</a></li>
+          <li class="menu_item"><a href="index.html">О нас</a></li>
+          <li class="menu_item"><a href="product.html">Продукты</a></li>
+          <li class="menu_item"><a href="blog.html">Блог</a></li>
+          <li class="menu_item"><a href="#footerr">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <button class="cart-button" onclick="openCart()" aria-label="Корзина">
+    <img class="cart-image" src="image/cart.png" alt="cart-image">
+  </button>
+  <article id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCart()">×</span>
+      <h2 class="openCart">Корзина</h2>
+      <ul id="cart-items"></ul>
+      <p class="total-price">Итого: <span id="total-price">0</span> ₽</p>
+      <button class="clear-cart-button" onclick="clearCart()">
+        Очистить корзину
+      </button>
+      <form id="order-form" method="post" action="/order" onsubmit="submitOrder(event)" autocomplete="on">
+        <h3>Оформление заказа</h3>
+        <label for="name">ФИО:</label>
+        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        <label for="email">Почта:</label>
+        <input type="text" id="email" name="email" placeholder="Ваша почта" required>
+        <label for="phone">Номер телефона:</label>
+        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99" required
+          title="Введите номер телефона">
+        <label for="address">Адрес:</label>
+        <textarea id="address" name="address" rows="3" placeholder="Улица, дом, квартира" required></textarea>
+        <label for="delivery-method">Способ доставки:</label>
+        <select id="delivery-method" name="delivery-method" required>
+          <option value="" disabled selected>
+            Выберите способ доставки
+          </option>
+          <option value="courier">Курьером</option>
+          <option value="pickup">Самовывоз</option>
+          <option value="post">Почтой</option>
+        </select>
+
+        <label for="payment-method">Способ оплаты:</label>
+        <select id="payment-method" name="payment-method" required>
+          <option value="" disabled selected>Выберите способ оплаты</option>
+          <option value="card">Картой</option>
+          <option value="cash">Наличными</option>
+          <option value="online">Онлайн-оплата</option>
+        </select>
+
+        <label>Вы даете согласие на обработку персональных данных </label>
+        <input type="checkbox" class="checkbox">
+
+        <button type="submit" class="order-button">Оформить заказ</button>
+      </form>
+
+      <div id="confirmation-message" style="display: none; text-align: center; margin-top: 20px">
+        Спасибо за ваш заказ! Мы свяжемся с вами в ближайшее время.
+      </div>
+    </div>
+  </article>
+
+  <section aria-labelledby="hero-title" class="hero">
+    <div class="container">
+      <h1 id="hero-title">Натуральные продукты <br>прямо с фермы</h1>
+      <p>Полезные и вкусные продукты для здорового питания</p>
+      <figure class="banner">
+        <figcaption hidden>
+          Изображения свежих натуральных продуктов
+        </figcaption>
+        <div class="slides">
+          <div class="slide">
+            <img src="image/image1.jpeg" alt="Слайд 1">
+          </div>
+          <div class="slide">
+            <img src="image/image2.png" alt="Слайд 2">
+          </div>
+          <div class="slide">
+            <img src="image/image3.png" alt="Слайд 3">
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <div class="reviews-section">
+    <h2>Отзывы наших клиентов</h2>
+    <div class="reviews-container">
+      <input type="radio" name="slider" id="slide1" checked>
+      <input type="radio" name="slider" id="slide2">
+      <input type="radio" name="slider" id="slide3">
+
+      <div class="reviews-wrapper">
+        <div class="review-card">
+          <img src="image/human.jpg" class="human" alt="human">
+          <p class="review-author">Анна Петрова</p>
+          <p class="star"><span>★★★★★</span></p>
+          <p class="review-text">
+            "Отличный сервис и качественные продукты! Рекомендую всем!"
+          </p>
+        </div>
+        <div class="review-card">
+          <img src="image/human1.jpg" class="human" alt="human">
+          <p class="review-author">Сергей Иванов</p>
+          <p class="star"><span>★★★★★</span></p>
+          <p class="review-text">
+            "Я очень доволен покупкой. Все пришло в срок и в отличном
+            состоянии."
+          </p>
+        </div>
+        <div class="review-card">
+          <img src="image/human2.jpg" class="human" alt="human">
+          <p class="review-author">Василий Пашкин</p>
+          <p class="star"><span>★★★★</span>★</p>
+          <p class="review-text">
+            "Хорошее качество и внимательное обслуживание."
+          </p>
+        </div>
+        <div class="review-card">
+          <img src="image/human3.jpg" class="human" alt="human">
+          <p class="review-author">Мария Смирнова</p>
+          <p class="star"><span>★★★★★</span></p>
+          <p class="review-text">"Обратная связь на высоте. Отличный сайт"</p>
+        </div>
+        <div class="review-card">
+          <img src="image/human4.jpg" class="human" alt="human">
+          <p class="review-author">Евгений Келевра</p>
+          <p class="star"><span>★★★★</span>★</p>
+          <p class="review-text">
+            "Товар хорошего качества. мои дети довольны"
+          </p>
+        </div>
+        <div class="review-card">
+          <img src="image/human5.jpg" class="human" alt="human">
+          <p class="review-author">Ванек</p>
+          <p class="star"><span>★★★</span>★★</p>
+          <p class="review-text">"Собственно говоря, круто!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <label for="slide1" class="nav-button">❮</label>
+      <label for="slide2" class="nav-button">❯</label>
+    </div>
+  </div>
+
+  <section aria-labelledby="popular-products-title" class="featured-products">
+    <div class="container">
+      <h2 id="popular-products-title">Популярные продукты</h2>
+      <article class="products-grid">
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/varenie_s_shishkami.png" alt="Варенье">
+              </a>
+              <div class="card_label">-10%</div>
+              <h3>Варенье <br>с шишками</h3>
+              <p class="price">1 кг</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Варенье приготовлено по старинным традициям с добавлением
+                мёда, чтобы минимизировать количество сахара, от чего и
+                сосновые шишечки такие мягкие и сладкие.
+              </p>
+              <button onclick="addToCart('Варенье с шишками ', 150)">
+                150 ₽
+              </button>
+              <div class="price_common">165 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/Мармелад_малиновый.PNG" alt="Мармелад">
+              </a>
+              <div class="card_label">-5%</div>
+              <h3>Мармелад<br>малиновый</h3>
+              <p class="price">1 кг</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Натуральный ягодный мармелад из пюре малины, выращенной и
+                переработанной в сибирском регионе. В нем нет ни грамма химии!
+              </p>
+              <button onclick="addToCart('Мармелад малиновый', 80)">
+                80 ₽
+              </button>
+              <div class="price_common1">84 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/Набор_специй.PNG" alt="Специи">
+              </a>
+              <div class="card_label">-15%</div>
+              <h3>Набор <br>специй</h3>
+              <p class="price">упаковка</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Приправа к мясу Состав: кулча, паприка, орегано, карри, семя
+                горчицы, зира, тимьян, чеснок сушеный, смесь перцев (черный,
+                зеленый, пряный).
+              </p>
+              <button onclick="addToCart('Натуральный мед', 500)">
+                500 ₽
+              </button>
+              <div class="price_common2">575 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/Сок_манго-облепиха.PNG" alt="Сок">
+              </a>
+              <div class="card_label">-20%</div>
+              <h3>Масло <br>облепихи</h3>
+              <p class="price">500 мл</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Сок ягодный восстановленный с мякотью облепихи Состав: сок
+                облепихи, пюре манго, сахар, консервант сорбиновая кислота,
+                вода подготовленная. <br>Стеклянная бутылка <br>Срок
+                годности 12 мес
+              </p>
+              <button onclick="addToCart('Сок манго-облепиха', 475)">
+                475 ₽
+              </button>
+              <div class="price_common3">570 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/Тувинский_кедровый_кофе.PNG" alt="Мед">
+              </a>
+              <div class="card_label">-20%</div>
+              <h3>Тувинский кедровый <br>кофе</h3>
+              <p class="price">300 г</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                это альтернатива традиционному кофе. Натуральный напиток,
+                приготовленный на основе цельного кедрового ореха. Обладает
+                нежным вкусом и превосходным ароматом кедрового ореха
+              </p>
+              <button onclick="addToCart('Тувинский кедровый кофе', 425)">
+                425 ₽
+              </button>
+              <div class="price_common4">510 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/Чай_с_молоком_тувинский.PNG" alt="Мед">
+              </a>
+              <div class="card_label">-20%</div>
+              <h3>Чай с<br>молоком тувинский</h3>
+              <p class="price">300 г</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Чай с молоком «Тувинский» — насыщенный, согревающий напиток с
+                традиционным вкусом и ароматом степей Тувы!
+              </p>
+              <button onclick="addToCart('Чай с молоком', 585)">
+                585 ₽
+              </button>
+              <div class="price_common5">702 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <a href="#!" class="card_img">
+                <img src="image/sliva.jpg" alt="Мед">
+              </a>
+              <div class="card_label">-10%</div>
+              <h3>Слива <br>красная</h3>
+              <p class="price">250 г</p>
+            </div>
+            <div class="card-back">
+              <h3>Описание</h3>
+              <p>
+                Слива — сочная, ароматная, богата витаминами и полезна для
+                пищеварения!
+              </p>
+              <button onclick="addToCart('Слива красная', 260)">
+                260 ₽
+              </button>
+              <div class="price_common6">286 ₽</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="category-title">
+    <div class="container">
+      <h2 id="category-title">Фрукты, овощи и зелень</h2>
+      <article class="categories">
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/granat-ochischennyy.jpg" alt="Гранат очищенный">
+              <h3>Гранат <br>очищенный</h3>
+              <p class="price">200 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Гранат — зернистое чудо Востока, сочное лакомство с пользой для сердца и иммунитета!
+              </p>
+              <button onclick="addToCart('Гранат очищенный', 499)">
+                499 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/chereshnya-otbornaya.jpg" alt="Черешня отборная">
+              <h3>Черешня <br>отборная</h3>
+              <p class="price">200 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Черешня — сладкая, ароматная, полная витаминов и радости лета!
+              </p>
+              <button onclick="addToCart('Черешня отборная', 200)">
+                200 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/apelsini_shok.jpg" alt="Апельсины шоколадные">
+              <h3>Апельсины <br>шоколадные</h3>
+              <p class="price">500 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Апельсиновый шоколад — изысканное сочетание нежного молочного
+                шоколада и ярких цитрусовых нот!
+              </p>
+              <button onclick="addToCart('Апельсины шоколадные', 500)">
+                500 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="dairy-title">
+    <div class="container">
+      <h2 id="dairy-title">Молочные изделия</h2>
+      <div class="categories">
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/maslo-domashnee.jpg" alt="Масло домашнее">
+              <h3>Масло <br>домашнее</h3>
+              <p class="price">250 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Домашнее масло — натуральное, сливочное, идеальное
+                для бутербродов и выпечки!
+              </p>
+              <button onclick="addToCart('Масло домашнее', 450)" aria-label="Добавить Масло домашнее в корзину">
+                450 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/mayonez-domashniy.jpg" alt="Майонез домашний">
+              <h3>Майонез <br>домашний</h3>
+              <p class="price">180 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Майонез домашний — натуральный, свежий, идеальный для салатов и любимых блюд!
+              </p>
+              <button onclick="addToCart('Майонез домашний', 180)">
+                180 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/moloko-organicheskoe.jpg" alt="Молоко органическое">
+              <h3>Молоко <br>органическое</h3>
+              <p class="price">1 л</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Органическое молоко — чистое, полезное, без добавок, с заботой о вашем здоровье!
+              </p>
+              <button onclick="addToCart('Молоко органическое', 195)">
+                195 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="meat-title">
+    <div class="container">
+      <h2 id="meat-title">Мясо, птица и рыба</h2>
+      <div class="categories">
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/sosiski-fermerskie.jpg" alt="Сосиски фермерские">
+              <h3>Сосиски <br>фермерские</h3>
+              <p class="price">200 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Фермерские сосиски — натуральные, свежие, приготовленные
+                из отборного мяса, с аппетитным ароматом и вкусом!
+              </p>
+              <button onclick="addToCart('Сосиски фермерские', 800)">
+                800 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/doktorskaya-osobaya-kolbasa.jpg" alt="Докторская колбаса">
+              <h3>
+                Докторская<br>
+                колбаса
+              </h3>
+              <p class="price">350 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Докторская колбаса — традиционная, нежная,
+                изготовлена из качественного мяса, с мягким вкусом и ароматом!
+              </p>
+              <button onclick="addToCart('Докторская колбаса', 475)">
+                475 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/govyadina.jpg" alt="Говядина">
+              <h3>Говядина</h3>
+              <p class="price">1,39 кг</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Говядина — мясо высшего качества, нежное, сочное,
+                идеально для шашлыка, стейков и мясных блюд!
+              </p>
+              <button onclick="addToCart('Говядина', 1995)">1995 ₽</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="bakery-title">
+    <div class="container">
+      <h2 id="bakery-title">Хлеб и выпечка</h2>
+      <div class="categories">
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/hleb-tostovyy.jpg" alt="Хлеб тостовый">
+              <h3>Хлеб <br>тостовый</h3>
+              <p class="price">440 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Тостовый хлеб — мягкий, воздушный, идеален для завтраков, бутербродов и сэндвичей!
+              </p>
+              <button onclick="addToCart('Хлеб тостовый', 595)">595 ₽</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/kruassan.jpg" alt="Круассан">
+              <h3>Круассан<br>классический</h3>
+              <p class="price">65 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Круассан классический — нежный, слоёный, ароматный, идеальное начало дня!
+              </p>
+              <button onclick="addToCart('Круассан классический', 195)">
+                195 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/trubochka-so-sguschenkoy.jpg" alt="Трубочка со сгущенкой">
+              <h3>Трубочка со <br>сгущенкой</h3>
+              <p class="price">100 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Трубочка со сгущёнкой — хрустящая вафельная
+                трубочка с тягучей, сладкой начинкой!
+              </p>
+              <button onclick="addToCart('Трубочка со сгущенкой', 195)">
+                195 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="confectionery-title">
+    <div class="container">
+      <h2 id="confectionery-title">Кондитерские изделия</h2>
+      <div class="categories">
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/domashnee-rafaello.jpg" alt="Домашнее Раффаэло">
+              <h3>Домашнее <br>Раффаэло</h3>
+              <p class="price">120 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Домашнее раффаэлло — нежные кокосовые конфеты с миндальным орехом и сливочной начинкой!
+              </p>
+              <button onclick="addToCart('Домашнее Раффэло', 495)">495 ₽</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/karamelnyy-medovik.png" alt="Карамельный медовик">
+              <h3>Карамельный <br>медовик</h3>
+              <p class="price">120 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Карамельный медовик — нежнейший торт с ароматом мёда и приятной карамельной ноткой!
+              </p>
+              <button onclick="addToCart('Карамельный медовик', 245)">
+                245 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/pechene-ovsyanoe.jpg" alt="Печенье овсяное">
+              <h3>Печенье <br>овсяное</h3>
+              <p class="price">240 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Овсяное печенье — хрустящее, ароматное, с кусочками орешков и сухофруктов!
+              </p>
+              <button onclick="addToCart('Печенье овсяное', 495)">495 ₽</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="semi-prepared-title">
+    <div class="container">
+      <h2 id="semi-prepared-title">Готовая еда и полуфабрикаты</h2>
+      <div class="categories">
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/blinchiki-5-sht.jpg" alt="Блины 5шт">
+              <h3>Блинчики <br>5 шт</h3>
+              <p class="price">150 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Набор из 5 тонких ароматных блинчиков — отличная основа для сытных завтраков и десертов!
+              </p>
+              <button onclick="addToCart('Блинчики 5шт', 195)">195 ₽</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/rolly-filadelfiya.jpg" alt="Роллы филадельфия">
+              <h3>Роллы Филадельфия <br>классические</h3>
+              <p class="price">300 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Роллы Филадельфия классические — нежный лосось,
+                сливочный сыр и рис, завёрнутые в тонкий лист нори!
+              </p>
+              <button onclick="addToCart('Роллы Филадельфия', 895)">895 ₽</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/zapekanka-iz-fermerskogo-tvoroga.jpg" alt="Запеканка из творога">
+              <h3>Запеканка из <br>творога</h3>
+              <p class="price">200 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Творожная запеканка — нежная, пышная, с
+                приятным ванильным ароматом и лёгкой кислинкой творога!
+              </p>
+              <button onclick="addToCart('Запеканка из творога', 265)">
+                265 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="frozen-food-title">
+    <div class="container">
+      <h2 id="frozen-food-title">Замороженные продукты</h2>
+      <div class="categories">
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/golubcy-s-govyadinoy.jpg" alt="">
+              <h3>
+                Голубцы с<br>
+                говядиной
+              </h3>
+              <p class="price">600 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Голубцы с говядиной — традиционные, мягкие капустные конвертики с
+                сочной начинкой из рубленой говядины и риса!
+              </p>
+              <button onclick="addToCart('Голбуцы с говядиной', 795)">
+                795 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/hinkali-s-govyadinoy.jpg" alt="">
+              <h3>Хинкали с <br>говядиной</h3>
+              <p class="price">500 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Хинкали с говядиной — пряные мешочки теста с ароматной, сочной начинкой из рубленой говяжьей мякоти!
+              </p>
+              <button onclick="addToCart('Хинкали с говядиной', 750)">
+                750 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/syrniki-tvorozhnye--zamorozhennye.jfif" alt="">
+              <h3>Сырники <br>творожные</h3>
+              <p class="price">300 г</p>
+            </div>
+            <div class="card-back1">
+              <h3>Описание</h3>
+              <p>
+                Сырники творожные — румяные, нежные оладушки из свежего творога с
+                золотистой корочкой и приятным сливочным вкусом!
+              </p>
+              <button onclick="addToCart('Сырники творожные', 325)">325 ₽</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="about-us">
+      <input type="checkbox" id="toggle-map">
+      <label for="toggle-map" class="toggle-label">Наша компания на google картах ⇓</label>
+      <div id="map">
+        <p>
+          ул. Мосрентген, 7, <br>завода Мосрентген, <br>Москва, 142771
+          <br><br>
+          вторник 08:00–23:00<br><br>
+          среда 08:00–23:00<br><br>
+          четверг 08:00–23:00<br><br>
+          пятница 08:00–23:00<br><br>
+          суббота 08:00–23:00<br><br>
+          воскресенье 08:00–23:00<br><br>
+          понедельник 08:00–23:00<br><br>
+        </p>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d143728.1010124216!2d37.32170659453125!3d55.74544519999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b553bccae3e647%3A0xbbbd1e112e1c704e!2z0K3QutC-0LzQsNGA0LrQtdGC!5e0!3m2!1sru!2sru!4v1744723808201!5m2!1sru!2sru"
+          width="400" height="300" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="contact-button" onclick="toggleChatWindow()">
+      <span id="chat-icon">💬</span>
+    </div>
+
+    <div class="chat-window">
+      <div id="messages" style="flex-grow: 1; display: flex; flex-direction: column;"></div>
+      <label class="input-label" for="user-message">Сообщение:</label>
+      <input id="user-message" class="text-area" placeholder="Введите ваше сообщение">
+      <button class="submit-button" onclick="sendMessage()">Отправить</button>
+    </div>
+
+    <div id="footerr">
+      <div class="footer">
+        <p>&copy;2025 eco.pro <br>Все права защищены.</p>
+        <div class="footerp">Контакты<br><br>8 (999) 999-99-99<br><br>eco.prod@mail.ru</div>
+        <a href="https://vk.com"><img src="image/vk.png" alt="vk" class="vk"></a>
+        <a href="https://web.telegram.org/a/"><img src="image/tg.png" alt="tg" class="tg"></a>
+        <a href="https://ok.ru/"><img src="image/ok.png" alt="ok" class="ok"></a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
